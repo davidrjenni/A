@@ -14,10 +14,12 @@ import (
 const usage = `Usage: A <cmd>
 
 Commands:
+	rn	renames the selected identifier
 	share	uploads the selected code to play.golang.org
 `
 
 var cmds = map[string]func(selection, []string){
+	"rn":    rename,
 	"share": share,
 }
 
