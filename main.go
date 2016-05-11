@@ -15,12 +15,14 @@ const usage = `Usage: A <cmd>
 
 Commands:
 	ex	extracts statements to a new function/method
+	impl	generate method stubs for implementing an interface
 	rn	renames the selected identifier
 	share	uploads the selected code to play.golang.org
 `
 
 var cmds = map[string]func(selection, []string){
 	"ex":    extract,
+	"impl":  impl,
 	"rn":    rename,
 	"share": share,
 }
