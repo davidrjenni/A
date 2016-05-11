@@ -33,6 +33,12 @@ func (r bodyReader) Read(b []byte) (int, error) {
 	return r.Win.Read("body", b)
 }
 
+type dataWriter struct{ *acme.Win }
+
+func (w dataWriter) Write(data []byte) (int, error) {
+	return w.Win.Write("data", data)
+}
+
 func readSelection() (s selection, err error) {
 	id, err := strconv.Atoi(os.Getenv("winid"))
 	if err != nil {
@@ -106,4 +112,20 @@ func reloadShowAddr(win *acme.Win, off int) error {
 		return err
 	}
 	return win.Ctl("dot=addr\nshow")
+}
+
+func writeBody(win *acme.Win, body string) error {
+	if err := win.Ctl("nomark"); err != nil {
+		fmt.Fprintf(os.Stderr, "failed to set nomark: %s", err)
+	}
+	defer func() {
+		if err := win.Ctl("mark"); err != nil {
+			fmt.Fprintf(os.Stderr, "failed to set mark: %s", err)
+		}
+	}()
+	if err := win.Addr("0,$"); err != nil {
+		return err
+	}
+	_, err := io.Copy(dataWriter{win}, strings.NewReader(body))
+	return err
 }
