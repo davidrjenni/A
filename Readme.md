@@ -11,7 +11,7 @@ A - Go tools for Acme.
 % go get github.com/davidrjenni/A
 
 % go get golang.org/x/tools/cmd/guru
-% go get -u github.com/zmb3/gogetdoc
+% go get github.com/zmb3/gogetdoc
 % go get github.com/godoctor/godoctor
 % go get github.com/josharian/impl
 % go get golang.org/x/tools/cmd/gorename
