@@ -18,6 +18,7 @@ const usage = `Usage: A <cmd>
 
 Commands:
 	def	shows declaration of selected identifier
+	desc	describes the selected syntax: definition, methods, etc.
 	doc	shows documentation for items in Go source code
 	ex	extracts statements to a new function/method
 	impl	generate method stubs for implementing an interface
@@ -27,6 +28,7 @@ Commands:
 
 var cmds = map[string]func(selection, []string){
 	"def":   definition,
+	"desc":  describe,
 	"doc":   godoc,
 	"ex":    extract,
 	"impl":  impl,

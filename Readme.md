@@ -27,6 +27,14 @@ A def
 Shows the declaration for the identifier under the cursor.
 This command uses `golang.org/x/tools/cmd/guru`.
 
+### Describe
+
+```
+A desc
+```
+Describes the declaration for the syntax under the cursor.
+This command uses `golang.org/x/tools/cmd/guru`.
+
 ### Documentation
 
 ```
