@@ -24,6 +24,7 @@ Commands:
 	fv	shows declaration of selected identifier
 	impl	generate method stubs for implementing an interface
 	rn	renames the selected identifier
+	refs	shows all refs to the entity denoted by selected identifier
 	share	uploads the selected code to play.golang.org
 `
 
@@ -34,6 +35,7 @@ var cmds = map[string]func(selection, []string){
 	"ex":    extract,
 	"fv":    freevars,
 	"impl":  impl,
+	"refs":  referrers,
 	"rn":    rename,
 	"share": share,
 }

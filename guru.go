@@ -24,3 +24,9 @@ func freevars(s selection, args []string) {
 	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "freevars", s.sel()))
 }
 
+// referrers shows all refs to the entity denoted by selected identifier
+// using golang.org/x/tools/cmd/guru.
+func referrers(s selection, args []string) {
+	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "referrers", s.pos()))
+}
+
