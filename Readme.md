@@ -10,6 +10,7 @@ A - Go tools for Acme.
 ```
 % go get github.com/davidrjenni/A
 
+% go get golang.org/x/tools/cmd/guru
 % go get -u github.com/zmb3/gogetdoc
 % go get github.com/godoctor/godoctor
 % go get github.com/josharian/impl
@@ -17,6 +18,14 @@ A - Go tools for Acme.
 ```
 
 ## Usage
+
+### Goto Definition
+
+```
+A def
+```
+Shows the declaration for the identifier under the cursor.
+This command uses `golang.org/x/tools/cmd/guru`.
 
 ### Documentation
 
