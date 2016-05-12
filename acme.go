@@ -27,6 +27,10 @@ func (s selection) pos() string {
 	return fmt.Sprintf("%s:#%d", s.filename, s.start)
 }
 
+func (s selection) sel() string {
+	return fmt.Sprintf("%s,#%d", s.pos(), s.end)
+}
+
 type bodyReader struct{ *acme.Win }
 
 func (r bodyReader) Read(b []byte) (int, error) {

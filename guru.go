@@ -17,3 +17,10 @@ func describe(s selection, args []string) {
 func definition(s selection, args []string) {
 	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "definition", s.pos()))
 }
+
+// freevars shows free variables of the selection
+// using golang.org/x/tools/cmd/guru.
+func freevars(s selection, args []string) {
+	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "freevars", s.sel()))
+}
+

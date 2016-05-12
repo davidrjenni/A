@@ -21,6 +21,7 @@ Commands:
 	desc	describes the selected syntax: definition, methods, etc.
 	doc	shows documentation for items in Go source code
 	ex	extracts statements to a new function/method
+	fv	shows declaration of selected identifier
 	impl	generate method stubs for implementing an interface
 	rn	renames the selected identifier
 	share	uploads the selected code to play.golang.org
@@ -31,6 +32,7 @@ var cmds = map[string]func(selection, []string){
 	"desc":  describe,
 	"doc":   godoc,
 	"ex":    extract,
+	"fv":    freevars,
 	"impl":  impl,
 	"rn":    rename,
 	"share": share,

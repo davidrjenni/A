@@ -51,6 +51,14 @@ A ex <name>
 Extracts the selected statements to a new function/method with name `<name>`.
 This command uses `github.com/godoctor/godoctor`.
 
+### Freevars
+
+```
+A fv
+```
+Shows the free variables of the selected snippet.
+This command uses `golang.org/x/tools/cmd/guru`.
+
 ### Generate Method Stubs
 
 ```
