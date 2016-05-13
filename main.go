@@ -21,6 +21,7 @@ Commands:
 	def	shows declaration of selected identifier
 	desc	describes the selected syntax: definition, methods, etc.
 	doc	shows documentation for items in Go source code
+	err	shows possible values of the selected error variable
 	ex	extracts statements to a new function/method
 	fv	shows declaration of selected identifier
 	impl	generate method stubs for implementing an interface
@@ -36,6 +37,7 @@ var cmds = map[string]func(selection, []string){
 	"def":   definition,
 	"desc":  describe,
 	"doc":   godoc,
+	"err":   whicherrs,
 	"ex":    extract,
 	"fv":    freevars,
 	"impl":  impl,

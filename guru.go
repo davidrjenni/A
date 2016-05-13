@@ -48,10 +48,15 @@ func what(s selection, args []string) {
 	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "what", s.pos()))
 }
 
+// whicherrs shows possible values of the selected error variable
+// using golang.org/x/tools/cmd/guru.
+func whicherrs(s selection, args []string) {
+	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "-scope", scope(args), "whicherrs", s.pos()))
+}
+
 func scope(args []string) string {
 	if len(args) == 0 {
 		return "."
 	}
 	return args[0]
 }
-

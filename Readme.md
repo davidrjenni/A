@@ -52,6 +52,15 @@ A doc
 Shows the documentation for the entity under the cursor.
 This command uses `github.com/zmb3/gogetdoc`.
 
+### Errors
+
+```
+A err <scope>
+```
+Shows possible values of the error variable under the cursor.
+`<scope>` is a comma-separated list of packages the analysis should be limited to, this parameter is optional.
+This command uses `golang.org/x/tools/cmd/guru`.
+
 ### Extract to Function/Method
 
 ```
