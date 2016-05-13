@@ -17,6 +17,7 @@ import (
 const usage = `Usage: A <cmd>
 
 Commands:
+	cle	shows possible targets of the selected function call
 	clr	shows possible callers of the selected function
 	cs	shows the path from the callgraph root to the selected function
 	def	shows declaration of selected identifier
@@ -34,6 +35,7 @@ Commands:
 `
 
 var cmds = map[string]func(selection, []string){
+	"cle":   callees,
 	"clr":   callers,
 	"cs":    callstack,
 	"def":   definition,

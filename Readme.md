@@ -19,6 +19,15 @@ A - Go tools for Acme.
 
 ## Usage
 
+### Callees
+
+```
+A cle <scope>
+```
+Shows possible targets of the function call under the cursor.
+`<scope>` is a comma-separated list of packages the analysis should be limited to, this parameter is optional.
+This command uses `golang.org/x/tools/cmd/guru`.
+
 ### Callers
 
 ```

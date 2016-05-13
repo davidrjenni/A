@@ -6,6 +6,12 @@ package main
 
 import "fmt"
 
+// callees shows possible targets of the selected function call
+// using golang.org/x/tools/cmd/guru.
+func callees(s selection, args []string) {
+	fmt.Println(runWithStdin(archive(s), "guru", "-scope", scope(args), "-modified", "callees", s.pos()))
+}
+
 // callers shows possible callers of the selected function
 // using golang.org/x/tools/cmd/guru.
 func callers(s selection, args []string) {
