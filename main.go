@@ -27,6 +27,7 @@ Commands:
 	rn	renames the selected identifier
 	refs	shows all refs to the entity denoted by selected identifier
 	share	uploads the selected code to play.golang.org
+	what	shows basic information about the selected syntax node
 `
 
 var cmds = map[string]func(selection, []string){
@@ -40,6 +41,7 @@ var cmds = map[string]func(selection, []string){
 	"refs":  referrers,
 	"rn":    rename,
 	"share": share,
+	"what":  what,
 }
 
 func main() {

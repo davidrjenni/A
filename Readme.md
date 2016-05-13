@@ -99,3 +99,11 @@ This commands uses `golang.org/x/tools/cmd/gorename`.
 A share
 ```
 Uploads the selected snippet to play.golang.org and prints the URL.
+
+### What
+
+```
+A what
+```
+Shows basic information about the selected syntax node.
+This command uses `golang.org/x/tools/cmd/guru`.

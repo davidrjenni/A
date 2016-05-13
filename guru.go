@@ -36,6 +36,12 @@ func referrers(s selection, args []string) {
 	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "referrers", s.pos()))
 }
 
+// what shows basic information about the selected syntax node
+// using golang.org/x/tools/cmd/guru.
+func what(s selection, args []string) {
+	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "what", s.pos()))
+}
+
 func scope(args []string) string {
 	if len(args) == 0 {
 		return "."
