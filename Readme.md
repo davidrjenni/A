@@ -19,6 +19,15 @@ A - Go tools for Acme.
 
 ## Usage
 
+### Callstack
+
+```
+A cs <scope>
+```
+Shows the path from the callgraph root to the function under the cursor.
+`<scope>` is a comma-separated list of packages the analysis should be limited to, this parameter is optional.
+This command uses `golang.org/x/tools/cmd/guru`.
+
 ### Goto Definition
 
 ```

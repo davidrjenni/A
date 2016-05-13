@@ -6,6 +6,12 @@ package main
 
 import "fmt"
 
+// callstack shows the path from the callgraph root to the selected function
+// using golang.org/x/tools/cmd/guru.
+func callstack(s selection, args []string) {
+	fmt.Println(runWithStdin(archive(s), "guru", "-scope", scope(args), "-modified", "callstack", s.pos()))
+}
+
 // describe describes the selected syntax: definition, methods, etc.
 // using golang.org/x/tools/cmd/guru.
 func describe(s selection, args []string) {

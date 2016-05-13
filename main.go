@@ -17,6 +17,7 @@ import (
 const usage = `Usage: A <cmd>
 
 Commands:
+	cs	shows the path from the callgraph root to the selected function
 	def	shows declaration of selected identifier
 	desc	describes the selected syntax: definition, methods, etc.
 	doc	shows documentation for items in Go source code
@@ -31,6 +32,7 @@ Commands:
 `
 
 var cmds = map[string]func(selection, []string){
+	"cs":    callstack,
 	"def":   definition,
 	"desc":  describe,
 	"doc":   godoc,
