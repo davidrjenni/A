@@ -48,6 +48,12 @@ func implements(s selection, args []string) {
 	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "-scope", scope(args), "implements", s.pos()))
 }
 
+// pointsto shows variables the selected pointer may point to
+// using golang.org/x/tools/cmd/guru.
+func pointsto(s selection, args []string) {
+	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "-scope", scope(args), "pointsto", s.sel()))
+}
+
 // referrers shows all refs to the entity denoted by selected identifier
 // using golang.org/x/tools/cmd/guru.
 func referrers(s selection, args []string) {

@@ -28,6 +28,7 @@ Commands:
 	fv	shows declaration of selected identifier
 	impl	generate method stubs for implementing an interface
 	impls	shows the 'implements' relation for the selected type or method
+	pto	shows variables the selected pointer may point to
 	rn	renames the selected identifier
 	refs	shows all refs to the entity denoted by selected identifier
 	share	uploads the selected code to play.golang.org
@@ -46,6 +47,7 @@ var cmds = map[string]func(selection, []string){
 	"fv":    freevars,
 	"impl":  impl,
 	"impls": implements,
+	"pto":   pointsto,
 	"refs":  referrers,
 	"rn":    rename,
 	"share": share,
