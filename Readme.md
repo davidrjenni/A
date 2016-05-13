@@ -68,6 +68,15 @@ A impl 'f *File' io.ReadWriteCloser
 Generates method stubs with receiver `<recv>` for implementing the interface `<iface>` and inserts them at the location of the cursor.
 This command uses `github.com/josharian/impl`.
 
+### Implements
+
+```
+A impls <scope>
+```
+Shows the `implements` relation for the type or method under the cursor.
+`<scope>` is a comma-separated list of packages the analysis should be limited to, this parameter is optional.
+This command uses `golang.org/x/tools/cmd/guru`.
+
 ### Referrers
 
 ```

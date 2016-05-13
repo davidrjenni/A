@@ -23,6 +23,7 @@ Commands:
 	ex	extracts statements to a new function/method
 	fv	shows declaration of selected identifier
 	impl	generate method stubs for implementing an interface
+	impls	shows the 'implements' relation for the selected type or method
 	rn	renames the selected identifier
 	refs	shows all refs to the entity denoted by selected identifier
 	share	uploads the selected code to play.golang.org
@@ -35,6 +36,7 @@ var cmds = map[string]func(selection, []string){
 	"ex":    extract,
 	"fv":    freevars,
 	"impl":  impl,
+	"impls": implements,
 	"refs":  referrers,
 	"rn":    rename,
 	"share": share,
