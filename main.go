@@ -28,6 +28,7 @@ Commands:
 	fv	shows declaration of selected identifier
 	impl	generate method stubs for implementing an interface
 	impls	shows the 'implements' relation for the selected type or method
+	peers	shows send/receive corresponding to selected channel op
 	pto	shows variables the selected pointer may point to
 	rn	renames the selected identifier
 	refs	shows all refs to the entity denoted by selected identifier
@@ -47,6 +48,7 @@ var cmds = map[string]func(selection, []string){
 	"fv":    freevars,
 	"impl":  impl,
 	"impls": implements,
+	"peers": peers,
 	"pto":   pointsto,
 	"refs":  referrers,
 	"rn":    rename,

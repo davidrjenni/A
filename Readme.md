@@ -113,6 +113,15 @@ Shows the `implements` relation for the type or method under the cursor.
 `<scope>` is a comma-separated list of packages the analysis should be limited to, this parameter is optional.
 This command uses `golang.org/x/tools/cmd/guru`.
 
+### Peers
+
+```
+A peers <scope>
+```
+Shows send/receive corresponding to the selected channel op.
+`<scope>` is a comma-separated list of packages the analysis should be limited to, this parameter is optional.
+This command uses `golang.org/x/tools/cmd/guru`.
+
 ### Points To
 
 ```

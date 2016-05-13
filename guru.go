@@ -48,6 +48,12 @@ func implements(s selection, args []string) {
 	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "-scope", scope(args), "implements", s.pos()))
 }
 
+// peers shows send/receive corresponding to selected channel op
+// using golang.org/x/tools/cmd/guru.
+func peers(s selection, args []string) {
+	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "-scope", scope(args), "peers", s.sel()))
+}
+
 // pointsto shows variables the selected pointer may point to
 // using golang.org/x/tools/cmd/guru.
 func pointsto(s selection, args []string) {
