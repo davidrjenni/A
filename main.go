@@ -2,6 +2,40 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+/*
+A is a wrapper around several Go tools for use inside of Acme.
+
+Usage:
+	A <cmd>
+
+The following commands are available:
+	A cle <scope>		# Shows possible targets of the function call under the cursor.
+	A clr <scope>		# Shows possible callers of the function under the cursor.
+	A cs <scope>		# Shows the path from the callgraph root to the function under the cursor.
+	A def			# Shows the declaration for the identifier under the cursor.
+	A desc			# Describes the declaration for the syntax under the cursor.
+	A doc			# Shows the documentation for the entity under the cursor.
+	A err <scope>		# Shows possible values of the error variable under the cursor.
+	A ex <name>		# Extracts the selected statements to a new function/method with name <name>.
+	A fv			# Shows the free variables of the selected snippet.
+	A impl <recv> <iface>	# Generates method stubs with receiver <recv> for implementing the interface <iface> and inserts them at the location of the cursor.
+	A impls <scope>		# Shows the `implements` relation for the type or method under the cursor.
+	A peers <scope>		# Shows send/receive corresponding to the selected channel op.
+	A pto <scope>		# Shows variables the selected pointer may point to.
+	A refs			# Shows all refs to the entity denoted by identifier under the cursor.
+	A rn <name>		# Renames the entity under the cursor with <name>.
+	A share			# Uploads the selected snippet to play.golang.org and prints the URL.
+	A what			# Shows basic information about the selected syntax node.
+
+<scope> is a comma-separated list of packages the analysis should be limited to, this parameter is optional.
+
+The following tools are used:
+	golang.org/x/tools/cmd/gorename
+	golang.org/x/tools/cmd/guru
+	github.com/godoctor/godoctor
+	github.com/zmb3/gogetdoc
+	github.com/josharian/impl
+*/
 package main
 
 import (
