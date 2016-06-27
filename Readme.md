@@ -1,8 +1,4 @@
-[![Build Status](https://drone.io/github.com/davidrjenni/A/status.png)](https://drone.io/github.com/davidrjenni/A/latest)
-[![GoDoc](https://godoc.org/github.com/davidrjenni/A?status.svg)](https://godoc.org/github.com/davidrjenni/A)
-[![Go Report Card](https://goreportcard.com/badge/github.com/davidrjenni/A)](https://goreportcard.com/report/github.com/davidrjenni/A)
-
-# A
+# A [![Build Status](https://travis-ci.org/davidrjenni/A.svg?branch=master)](https://travis-ci.org/davidrjenni/A) [![GoDoc](https://godoc.org/github.com/davidrjenni/A?status.svg)](https://godoc.org/github.com/davidrjenni/A) [![Go Report Card](https://goreportcard.com/badge/github.com/davidrjenni/A)](https://goreportcard.com/report/github.com/davidrjenni/A)
 
 A - Go tools for Acme.
 
