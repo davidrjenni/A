@@ -14,6 +14,8 @@ import (
 	"strings"
 
 	"9fans.net/go/acme"
+	"9fans.net/go/plan9"
+	"9fans.net/go/plumb"
 )
 
 type selection struct {
@@ -132,4 +134,21 @@ func writeBody(win *acme.Win, body string) error {
 	}
 	_, err := io.Copy(dataWriter{win}, strings.NewReader(body))
 	return err
+}
+
+func plumbText(data string) error {
+	f, err := plumb.Open("send", plan9.OWRITE)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	m := &plumb.Message{
+		Src:  "A",
+		Dst:  "edit",
+		Dir:  "/",
+		Type: "text",
+		Data: []byte(data),
+	}
+	return m.Send(f)
 }
