@@ -4,7 +4,11 @@
 
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+)
 
 // callees shows possible targets of the selected function call
 // using golang.org/x/tools/cmd/guru.
@@ -30,10 +34,22 @@ func describe(s selection, args []string) {
 	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "describe", s.pos()))
 }
 
+type GuruDef struct {
+	Objpos, Descr string
+}
+
 // definition shows declaration of selected identifier
 // using golang.org/x/tools/cmd/guru.
 func definition(s selection, args []string) {
-	fmt.Println(runWithStdin(archive(s), "guru", "-modified", "definition", s.pos()))
+	var gd GuruDef
+	js := runWithStdin(archive(s), "guru", "-json", "-modified", "definition", s.pos())
+	if err := json.Unmarshal([]byte(js), &gd); err != nil {
+		log.Fatalf("failed to unmarshal guru json: %v\n", err)
+	}
+	if err := plumbText(gd.Objpos); err != nil {
+		fmt.Println(gd.Objpos)
+		log.Fatalf("failed to plumb: %v\n", err)
+	}
 }
 
 // freevars shows free variables of the selection
