@@ -1,10 +1,17 @@
 language: go
 
-script: go test -race -v ./...
+env: GO15VENDOREXPERIMENT=1 # support vendor/ for Go 1.5.x
+
+before_install:
+- touch Makefile # for Travis CI: avoid running go get ./...
+- go vet $(go list ./... | grep -v /vendor/) # avoid vetting vendor/ for Go < 1.9.x
+
+script:
+- go test -race -v $(go list ./... | grep -v /vendor/) # avoid testing vendor/ for Go < 1.9.x
 
 go:
-    - 1.5.3
-    - 1.6
-    - 1.7
+    - 1.5.x
+    - 1.6.x
+    - 1.7.x
     - 1.8.x
     - tip
