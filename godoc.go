@@ -9,5 +9,5 @@ import "fmt"
 // godoc shows documentation for items in Go source code
 // using github.com/zmb3/gogetdoc.
 func godoc(s selection, args []string) {
-	fmt.Println(runWithStdin(archive(s), "gogetdoc", "-pos", s.pos()))
+	fmt.Println(runWithStdin(archive(s), "gogetdoc", "-modified", "-pos", s.pos()))
 }
