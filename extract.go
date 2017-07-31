@@ -5,7 +5,6 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"log"
 	"strings"
@@ -17,12 +16,7 @@ func extract(s selection, args []string) {
 	if len(args) < 1 {
 		log.Fatal("Usage: A ex <name>")
 	}
-	l0 := bytes.Count(s.body[:s.start], []byte{'\n'}) + 1
-	l1 := bytes.Count(s.body[:s.end], []byte{'\n'}) + 1
-	if l0 == l1 {
-		l1++
-	}
-	pos := fmt.Sprintf("%d,1:%d,1", l0, l1)
+	pos := fmt.Sprintf("%d,%d", s.start, s.end-s.start)
 	code := run("godoctor", "-scope", ".", "-complete", "-file", s.filename, "-pos", pos, "extract", args[0])
 	if i := strings.Index(code, "\n"); i != -1 {
 		code = code[i+1:]
