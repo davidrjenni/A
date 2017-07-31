@@ -13,25 +13,32 @@ type offsetTest struct {
 	data       string
 	offset     int
 	byteOffset int
+	line       int
 }
 
 var offsetTests = []offsetTest{
-	{"abcdef", 0, 0},
-	{"abcdef", 1, 1},
-	{"abcdef", 5, 5},
-	{"日本語def", 0, 0},
-	{"日本語def", 1, 3},
-	{"日本語def", 5, 11},
+	{"abcdef", 0, 0, 1},
+	{"abcdef", 1, 1, 1},
+	{"abcdef", 5, 5, 1},
+	{"日本語def", 0, 0, 1},
+	{"日本語def", 1, 3, 1},
+	{"日本語def", 5, 11, 1},
+	{"日本語def\n", 7, 13, 2},
+	{"日本語def\n日本語def", 13, 25, 2},
+	{"日本語def\n日本語def\nabc", 17, 29, 3},
 }
 
 func TestByteOffset(t *testing.T) {
-	for _, test := range offsetTests {
-		off, err := byteOffset(strings.NewReader(test.data), test.offset)
+	for i, test := range offsetTests {
+		off, line, err := byteOffset(strings.NewReader(test.data), test.offset)
 		if err != nil {
-			t.Errorf("got error %v", err)
+			t.Errorf("%d: got error %v", i, err)
 		}
 		if off != test.byteOffset {
-			t.Errorf("expected byte offset %d, got %d", test.byteOffset, off)
+			t.Errorf("%d: expected byte offset %d, got %d", i, test.byteOffset, off)
+		}
+		if line != test.line {
+			t.Errorf("%d: expected line number %d, got %d", i, test.line, line)
 		}
 	}
 }

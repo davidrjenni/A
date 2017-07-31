@@ -19,10 +19,11 @@ import (
 )
 
 type selection struct {
-	win        *acme.Win
-	start, end int
-	filename   string
-	body       []byte
+	win                *acme.Win
+	start, end         int
+	startLine, endLine int
+	filename           string
+	body               []byte
 }
 
 func (s selection) pos() string {
@@ -66,11 +67,11 @@ func readSelection() (s selection, err error) {
 	if err != nil {
 		return s, err
 	}
-	s.start, err = byteOffset(bytes.NewReader(s.body), q0)
+	s.start, s.startLine, err = byteOffset(bytes.NewReader(s.body), q0)
 	if err != nil {
 		return s, err
 	}
-	s.end, err = byteOffset(bytes.NewReader(s.body), q1)
+	s.end, s.endLine, err = byteOffset(bytes.NewReader(s.body), q1)
 	if err != nil {
 		return s, err
 	}
@@ -99,11 +100,15 @@ func readAddr(win *acme.Win) (q0, q1 int, err error) {
 	return win.ReadAddr()
 }
 
-func byteOffset(r io.RuneReader, q int) (off int, err error) {
+func byteOffset(r io.RuneReader, q int) (off, line int, err error) {
+	line = 1 // the first line is line 1
 	for i := 0; i != q; i++ {
-		_, s, err := r.ReadRune()
+		r, s, err := r.ReadRune()
 		if err != nil {
-			return 0, err
+			return 0, 0, err
+		}
+		if r == '\n' {
+			line++
 		}
 		off += s
 	}
