@@ -22,12 +22,19 @@ type selection struct {
 	win                *acme.Win
 	start, end         int
 	startLine, endLine int
-	filename           string
+	fname              string
 	body               []byte
 }
 
+func (s selection) filename() string {
+	if s.fname == "" {
+		return "-"
+	}
+	return s.fname
+}
+
 func (s selection) pos() string {
-	return fmt.Sprintf("%s:#%d", s.filename, s.start)
+	return fmt.Sprintf("%s:#%d", s.filename(), s.start)
 }
 
 func (s selection) sel() string {
@@ -55,7 +62,7 @@ func readSelection() (s selection, err error) {
 	if err != nil {
 		return s, err
 	}
-	s.filename, err = readFilename(s.win)
+	s.fname, err = readFilename(s.win)
 	if err != nil {
 		return s, err
 	}

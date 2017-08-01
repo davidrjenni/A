@@ -69,7 +69,8 @@ func extract(s selection, args []string) {
 		log.Fatal("Usage: A ex <name>")
 	}
 	pos := fmt.Sprintf("%d,%d", s.start, s.end-s.start)
-	code := run("godoctor", "-scope", ".", "-complete", "-file", s.filename, "-pos", pos, "extract", args[0])
+	stdin := bytes.NewReader(s.body)
+	code := runWithStdin(stdin, "godoctor", "-scope", ".", "-complete", "-file", s.filename(), "-pos", pos, "extract", args[0])
 	if i := strings.Index(code, "\n"); i != -1 {
 		code = code[i+1:]
 	}
