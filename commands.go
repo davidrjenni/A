@@ -75,7 +75,7 @@ func extract(s selection, args []string) {
 		code = code[i+1:]
 	}
 	writeBody(s.win, code)
-	reloadShowAddr(s.win, s.start)
+	showAddr(s.win, s.start)
 }
 
 // freevars shows free variables of the selection
@@ -97,7 +97,7 @@ func impl(s selection, args []string) {
 		end = string(s.body[s.start+1:])
 	}
 	writeBody(s.win, string(s.body[:s.start])+"\n"+code+end)
-	reloadShowAddr(s.win, s.start)
+	showAddr(s.win, s.start)
 }
 
 // implements shows the 'implements' relation for the selected type or method

@@ -130,6 +130,10 @@ func reloadShowAddr(win *acme.Win, off int) error {
 	if err := win.Ctl("get"); err != nil {
 		return err
 	}
+	return showAddr(win, off)
+}
+
+func showAddr(win *acme.Win, off int) error {
 	if err := win.Addr("#%d", off); err != nil {
 		return err
 	}
