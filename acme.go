@@ -26,6 +26,10 @@ type selection struct {
 	body               []byte
 }
 
+func (s selection) archive() io.Reader {
+	return strings.NewReader(fmt.Sprintf("%s\n%d\n%s", s.filename(), len(s.body), s.body))
+}
+
 func (s selection) filename() string {
 	if s.fname == "" {
 		return "-"

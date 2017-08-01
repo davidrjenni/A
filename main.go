@@ -40,12 +40,10 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 	"log"
 	"os"
 	"os/exec"
-	"strings"
 )
 
 const usage = `Usage: A <cmd>
@@ -124,9 +122,4 @@ func runWithStdin(stdin io.Reader, cmd string, args ...string) string {
 		log.Fatalf("%s failed: %v\n", cmd, err)
 	}
 	return buf.String()
-}
-
-func archive(s selection) io.Reader {
-	archive := fmt.Sprintf("%s\n%d\n%s", s.filename, len(s.body), string(s.body))
-	return strings.NewReader(archive)
 }
