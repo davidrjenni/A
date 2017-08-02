@@ -45,6 +45,10 @@ func (s selection) sel() string {
 	return fmt.Sprintf("%s,#%d", s.pos(), s.end)
 }
 
+func (s selection) lineSel() string {
+	return fmt.Sprintf("%d,%d", s.startLine, s.endLine)
+}
+
 type bodyReader struct{ *acme.Win }
 
 func (r bodyReader) Read(b []byte) (int, error) {

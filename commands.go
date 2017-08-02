@@ -14,6 +14,25 @@ import (
 	"strings"
 )
 
+// addTags adds tags to the selected struct fields
+// using github.com/fatih/gomodifytags.
+func addTags(s selection, args []string) {
+	if len(args) < 1 {
+		log.Fatal(`Usage: A addtags <tags> [options]
+<tags>:	comma-separated tags to add, e.g. json,xml
+[options]:	options to add, e.g. 'json=omitempty'`)
+	}
+	arguments := []string{
+		"-file", s.filename(), "-modified", "-line", s.lineSel(), "-add-tags", args[0],
+	}
+	if len(args) > 1 {
+		arguments = append(arguments, "-add-options", args[1])
+	}
+	code := runWithStdin(s.archive(), "gomodifytags", arguments...)
+	writeBody(s.win, code)
+	showAddr(s.win, s.start)
+}
+
 // callees shows possible targets of the selected function call
 // using golang.org/x/tools/cmd/guru.
 func callees(s selection, args []string) {
@@ -132,6 +151,25 @@ func rename(s selection, args []string) {
 	}
 	run("gorename", "-offset", s.pos(), "-to", args[0])
 	reloadShowAddr(s.win, s.start)
+}
+
+// rmTags removes tags  the selected struct fields
+// using github.com/fatih/gomodifytags.
+func rmTags(s selection, args []string) {
+	if len(args) < 1 {
+		log.Fatal(`Usage: A rmtags <tags> [options]
+<tags>:	comma-separated tags to remove, e.g. json,xml
+[options]:	options to remove, e.g. 'json=omitempty'`)
+	}
+	arguments := []string{
+		"-file", s.filename(), "-modified", "-line", s.lineSel(), "-remove-tags", args[0],
+	}
+	if len(args) > 1 {
+		arguments = append(arguments, "-remove-options", args[1])
+	}
+	code := runWithStdin(s.archive(), "gomodifytags", arguments...)
+	writeBody(s.win, code)
+	showAddr(s.win, s.start)
 }
 
 // share uploads the selected code to play.golang.org

@@ -7,14 +7,25 @@ A - Go tools for Acme.
 ```
 % go get github.com/davidrjenni/A
 
-% go get golang.org/x/tools/cmd/guru
-% go get github.com/zmb3/gogetdoc
-% go get github.com/godoctor/godoctor
-% go get github.com/josharian/impl
-% go get golang.org/x/tools/cmd/gorename
+% go get -u golang.org/x/tools/cmd/guru
+% go get -u github.com/zmb3/gogetdoc
+% go get -u github.com/godoctor/godoctor
+% go get -u github.com/josharian/impl
+% go get -u golang.org/x/tools/cmd/gorename
+% go get -u github.com/fatih/gomodifytags
 ```
 
 ## Usage
+
+### Add Struct Tags
+
+```
+A addtags <tags> [options]
+```
+Adds struct tags and tag options to the selected struct fields.
+`<tags>` is a comma-separated list of tags to add, e.g. `json,xml`.
+`[options]` is an optional list of tag options to add, e.g. `'json=omitempty,xml=omitempty'`
+This command uses `github.com/fatih/gomodifytags`.
 
 ### Callees
 
@@ -135,6 +146,16 @@ A refs
 ```
 Shows all refs to the entity denoted by identifier under the cursor.
 This command uses `golang.org/x/tools/cmd/guru`.
+
+### Remove Struct Tags
+
+```
+A rmtags <tags> [options]
+```
+Removes struct tags and tag options from the selected struct fields.
+`<tags>` is a comma-separated list of tags to remove, e.g. `json,xml`.
+`[options]` is an optional list of tag options to remove, e.g. `'json=omitempty,xml=omitempty'`
+This command uses `github.com/fatih/gomodifytags`.
 
 ### Renaming
 
