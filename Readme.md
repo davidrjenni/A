@@ -26,6 +26,7 @@ Adds struct tags and tag options to the selected struct fields.
 `<tags>` is a comma-separated list of tags to add, e.g. `json,xml`.
 `[options]` is an optional list of tag options to add, e.g. `'json=omitempty,xml=omitempty'`
 This command uses `github.com/fatih/gomodifytags`.
+See it in action [here](https://twitter.com/davidrjenni/status/893130797376516096).
 
 ### Callees
 
@@ -156,6 +157,7 @@ Removes struct tags and tag options from the selected struct fields.
 `<tags>` is a comma-separated list of tags to remove, e.g. `json,xml`.
 `[options]` is an optional list of tag options to remove, e.g. `'json=omitempty,xml=omitempty'`
 This command uses `github.com/fatih/gomodifytags`.
+See it in action [here](https://twitter.com/davidrjenni/status/893130797376516096).
 
 ### Renaming
 
