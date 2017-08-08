@@ -18,6 +18,7 @@ The following commands are available:
 	A doc			# Shows the documentation for the entity under the cursor.
 	A err <scope>		# Shows possible values of the error variable under the cursor.
 	A ex <name>		# Extracts the selected statements to a new function/method with name <name>.
+	A fstruct		# Fills a struct literal with default values.
 	A fv			# Shows the free variables of the selected snippet.
 	A impl <recv> <iface>	# Generates method stubs with receiver <recv> for implementing the interface <iface> and inserts them at the location of the cursor.
 	A impls <scope>		# Shows the `implements` relation for the type or method under the cursor.
@@ -38,6 +39,7 @@ The following tools are used:
 	github.com/zmb3/gogetdoc
 	github.com/josharian/impl
 	github.com/fatih/gomodifytags
+	github.com/davidrjenni/reftools/cmd/fillstruct
 */
 package main
 
@@ -61,6 +63,7 @@ Commands:
 	doc	shows documentation for items in Go source code
 	err	shows possible values of the selected error variable
 	ex	extracts statements to a new function/method
+	fstruct	fills a struct literal with default values
 	fv	shows declaration of selected identifier
 	impl	generate method stubs for implementing an interface
 	impls	shows the 'implements' relation for the selected type or method
@@ -83,6 +86,7 @@ var cmds = map[string]func(selection, []string){
 	"doc":     godoc,
 	"err":     whicherrs,
 	"ex":      extract,
+	"fstruct": fillstruct,
 	"fv":      freevars,
 	"impl":    impl,
 	"impls":   implements,

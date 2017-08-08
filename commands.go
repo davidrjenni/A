@@ -97,6 +97,27 @@ func extract(s selection, args []string) {
 	showAddr(s.win, s.start)
 }
 
+// fillstruct fills a struct literal with default values
+// using github.com/davidrjenni/reftools/cmd/fillstruct.
+func fillstruct(s selection, args []string) {
+	buf := runWithStdin(s.archive(), "fillstruct", "-modified", "-file", s.filename(), "-offset", fmt.Sprintf("%d", s.start))
+	res := struct {
+		Start int    `json:"start"`
+		End   int    `json:"end"`
+		Code  string `json:"code"`
+	}{}
+	if err := json.Unmarshal([]byte(buf), &res); err != nil {
+		log.Fatal(err)
+	}
+	if err := s.win.Addr("#%d,#%d", res.Start, res.End); err != nil {
+		log.Fatal(err)
+	}
+	if _, err := s.win.Write("data", []byte(res.Code)); err != nil {
+		log.Fatal(err)
+	}
+	showAddr(s.win, s.start)
+}
+
 // freevars shows free variables of the selection
 // using golang.org/x/tools/cmd/guru.
 func freevars(s selection, args []string) {

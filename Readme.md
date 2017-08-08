@@ -13,6 +13,7 @@ A - Go tools for Acme.
 % go get -u github.com/josharian/impl
 % go get -u golang.org/x/tools/cmd/gorename
 % go get -u github.com/fatih/gomodifytags
+% go get -u github.com/davidrjenni/reftools/cmd/fillstruct
 ```
 
 ## Usage
@@ -95,6 +96,14 @@ A ex <name>
 ```
 Extracts the selected statements to a new function/method with name `<name>`.
 This command uses `github.com/godoctor/godoctor`.
+
+### Fill a Struct Literal with Default Values
+
+```
+A fstruct
+```
+Fills the selected struct literal with default values.
+This command uses `github.com/davidrjenni/reftools/cmd/fillstruct`.
 
 ### Freevars
 
