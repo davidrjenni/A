@@ -11,8 +11,16 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 )
+
+type gomodifytagsOutput struct {
+	Start int      `json:"start"`
+	End   int      `json:"end"`
+	Lines []string `json:"lines"`
+	Errs  []string `json:"errors"`
+}
 
 // addTags adds tags to the selected struct fields
 // using github.com/fatih/gomodifytags.
@@ -23,14 +31,26 @@ func addTags(s selection, args []string) {
 [options]:	options to add, e.g. 'json=omitempty'`)
 	}
 	arguments := []string{
-		"-file", s.filename(), "-modified", "-line", s.lineSel(), "-add-tags", args[0],
+		"-file", s.filename(), "-modified", "-format", "json", "-line", s.lineSel(), "-add-tags", args[0],
 	}
 	if len(args) > 1 {
 		arguments = append(arguments, "-add-options", args[1])
 	}
-	code := runWithStdin(s.archive(), "gomodifytags", arguments...)
-	writeBody(s.win, code)
+	buf := runWithStdin(s.archive(), "gomodifytags", arguments...)
+	var out gomodifytagsOutput
+	if err := json.Unmarshal([]byte(buf), &out); err != nil {
+		log.Fatal(err)
+	}
+	if err := s.win.Addr("%d,%d", out.Start, out.End); err != nil {
+		log.Fatal(err)
+	}
+	if _, err := s.win.Write("data", []byte(strings.Join(out.Lines, "\n")+"\n")); err != nil {
+		log.Fatal(err)
+	}
 	showAddr(s.win, s.start)
+	if len(out.Errs) != 0 {
+		fmt.Fprintln(os.Stderr, strings.Join(out.Errs, "\n"))
+	}
 }
 
 // callees shows possible targets of the selected function call
@@ -183,14 +203,26 @@ func rmTags(s selection, args []string) {
 [options]:	options to remove, e.g. 'json=omitempty'`)
 	}
 	arguments := []string{
-		"-file", s.filename(), "-modified", "-line", s.lineSel(), "-remove-tags", args[0],
+		"-file", s.filename(), "-modified", "-format", "json", "-line", s.lineSel(), "-remove-tags", args[0],
 	}
 	if len(args) > 1 {
 		arguments = append(arguments, "-remove-options", args[1])
 	}
-	code := runWithStdin(s.archive(), "gomodifytags", arguments...)
-	writeBody(s.win, code)
+	buf := runWithStdin(s.archive(), "gomodifytags", arguments...)
+	var out gomodifytagsOutput
+	if err := json.Unmarshal([]byte(buf), &out); err != nil {
+		log.Fatal(err)
+	}
+	if err := s.win.Addr("%d,%d", out.Start, out.End); err != nil {
+		log.Fatal(err)
+	}
+	if _, err := s.win.Write("data", []byte(strings.Join(out.Lines, "\n")+"\n")); err != nil {
+		log.Fatal(err)
+	}
 	showAddr(s.win, s.start)
+	if len(out.Errs) != 0 {
+		fmt.Fprintln(os.Stderr, strings.Join(out.Errs, "\n"))
+	}
 }
 
 // share uploads the selected code to play.golang.org
