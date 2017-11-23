@@ -19,6 +19,7 @@ The following commands are available:
 	A err <scope>		# Shows possible values of the error variable under the cursor.
 	A ex <name>		# Extracts the selected statements to a new function/method with name <name>.
 	A fstruct		# Fills a struct literal with default values.
+	A fswitch		# Fills a (type) switch statement with case statements.
 	A fv			# Shows the free variables of the selected snippet.
 	A impl <recv> <iface>	# Generates method stubs with receiver <recv> for implementing the interface <iface> and inserts them at the location of the cursor.
 	A impls <scope>		# Shows the `implements` relation for the type or method under the cursor.
@@ -40,6 +41,7 @@ The following tools are used:
 	github.com/josharian/impl
 	github.com/fatih/gomodifytags
 	github.com/davidrjenni/reftools/cmd/fillstruct
+	github.com/davidrjenni/reftools/cmd/fillswitch
 */
 package main
 
@@ -87,6 +89,7 @@ var cmds = map[string]func(selection, []string){
 	"err":     whicherrs,
 	"ex":      extract,
 	"fstruct": fillstruct,
+	"fswitch": fillswitch,
 	"fv":      freevars,
 	"impl":    impl,
 	"impls":   implements,

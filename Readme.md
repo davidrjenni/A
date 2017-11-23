@@ -14,6 +14,7 @@ A - Go tools for Acme.
 % go get -u golang.org/x/tools/cmd/gorename
 % go get -u github.com/fatih/gomodifytags
 % go get -u github.com/davidrjenni/reftools/cmd/fillstruct
+% go get -u github.com/davidrjenni/reftools/cmd/fillswitch
 ```
 
 ## Usage
@@ -104,6 +105,14 @@ A fstruct
 ```
 Fills the selected struct literal with default values.
 This command uses `github.com/davidrjenni/reftools/cmd/fillstruct`.
+
+### Fill a (Type) Switch Statement with Case Statements
+
+```
+A fswitch
+```
+Fills the selected (type) switch statement with case statements.
+This command uses `github.com/davidrjenni/reftools/cmd/fillswitch`.
 
 ### Freevars
 
