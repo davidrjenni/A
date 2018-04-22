@@ -71,14 +71,14 @@ func callstack(s selection, args []string) {
 	fmt.Println(runWithStdin(s.archive(), "guru", "-scope", scope(args), "-modified", "callstack", s.pos()))
 }
 
-type GuruDef struct {
+type guruDef struct {
 	Objpos, Descr string
 }
 
 // definition shows declaration of selected identifier
 // using golang.org/x/tools/cmd/guru.
 func definition(s selection, args []string) {
-	var gd GuruDef
+	var gd guruDef
 	js := runWithStdin(s.archive(), "guru", "-json", "-modified", "definition", s.pos())
 	if err := json.Unmarshal([]byte(js), &gd); err != nil {
 		log.Fatalf("failed to unmarshal guru json: %v\n", err)
