@@ -1,7 +1,5 @@
 language: go
 
-env: GO15VENDOREXPERIMENT=1 # support vendor/ for Go 1.5.x
-
 install: true # use vendor/, skip go get
 
 before_install:
