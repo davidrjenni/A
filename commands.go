@@ -126,20 +126,18 @@ type output struct {
 // fillstruct fills a struct literal with default values
 // using github.com/davidrjenni/reftools/cmd/fillstruct.
 func fillstruct(s selection, args []string) {
-	buf := runWithStdin(s.archive(), "fillstruct", "-modified", "-file", s.filename(), "-offset", fmt.Sprintf("%d", s.start))
-	res := struct {
-		Start int    `json:"start"`
-		End   int    `json:"end"`
-		Code  string `json:"code"`
-	}{}
+	buf := runWithStdin(s.archive(), "fillstruct", "-modified", "-file", s.filename(), "-offset", fmt.Sprintf("%d", s.start), "-line", fmt.Sprintf("%d", s.startLine))
+	var res []output
 	if err := json.Unmarshal([]byte(buf), &res); err != nil {
 		log.Fatal(err)
 	}
-	if err := s.win.Addr("#%d,#%d", res.Start, res.End); err != nil {
-		log.Fatal(err)
-	}
-	if _, err := s.win.Write("data", []byte(res.Code)); err != nil {
-		log.Fatal(err)
+	for _, out := range res {
+		if err := s.win.Addr("#%d,#%d", out.Start, out.End); err != nil {
+			log.Fatal(err)
+		}
+		if _, err := s.win.Write("data", []byte(out.Code)); err != nil {
+			log.Fatal(err)
+		}
 	}
 	showAddr(s.win, s.start)
 }
