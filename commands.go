@@ -8,11 +8,15 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
+
+	"golang.org/x/tools/cmd/guru/serial"
 )
 
 type gomodifytagsOutput struct {
@@ -71,20 +75,16 @@ func callstack(s selection, args []string) {
 	fmt.Println(runWithStdin(s.archive(), "guru", "-scope", scope(args), "-modified", "callstack", s.pos()))
 }
 
-type guruDef struct {
-	Objpos, Descr string
-}
-
 // definition shows declaration of selected identifier
 // using golang.org/x/tools/cmd/guru.
 func definition(s selection, args []string) {
-	var gd guruDef
+	var gd serial.Definition
 	js := runWithStdin(s.archive(), "guru", "-json", "-modified", "definition", s.pos())
 	if err := json.Unmarshal([]byte(js), &gd); err != nil {
 		log.Fatalf("failed to unmarshal guru json: %v\n", err)
 	}
-	if err := plumbText(gd.Objpos); err != nil {
-		fmt.Println(gd.Objpos)
+	if err := plumbText(gd.ObjPos); err != nil {
+		fmt.Println(gd.ObjPos)
 		log.Fatalf("failed to plumb: %v\n", err)
 	}
 }
@@ -201,10 +201,62 @@ func pointsto(s selection, args []string) {
 	fmt.Println(runWithStdin(s.archive(), "guru", "-modified", "-scope", scope(args), "pointsto", s.sel()))
 }
 
+type posShortener string
+
+func newPosShortener() posShortener {
+	wd, err := os.Getwd()
+	if err != nil {
+		return posShortener("")
+	}
+	return posShortener(wd)
+}
+
+// Do shortens the pos (of the form "file:line:col") by converting the
+// file part to a relative path if it is shorter.
+func (ps posShortener) do(pos string) string {
+	if ps == "" {
+		return pos
+	}
+	i := bytes.LastIndexByte([]byte(pos), ':')
+	if i < 0 {
+		return pos
+	}
+	i = bytes.LastIndexByte([]byte(pos[:i]), ':')
+	if i < 0 {
+		return pos
+	}
+	fpath, addr := pos[:i], pos[i:]
+
+	rel, err := filepath.Rel(string(ps), fpath)
+	if err != nil || len(rel) > len(fpath) {
+		return pos
+	}
+	return rel + addr
+}
+
 // referrers shows all refs to the entity denoted by selected identifier
 // using golang.org/x/tools/cmd/guru.
 func referrers(s selection, args []string) {
-	fmt.Println(runWithStdin(s.archive(), "guru", "-modified", "referrers", s.pos()))
+	ps := newPosShortener()
+
+	var init serial.ReferrersInitial
+	js := runWithStdin(s.archive(), "guru", "-json", "-modified", "referrers", s.pos())
+	dec := json.NewDecoder(strings.NewReader(js))
+	if err := dec.Decode(&init); err != nil {
+		log.Fatalf("failed to unmarshal ReferrersInitial: %v\n", err)
+	}
+	fmt.Printf("%v: references to %v\n", ps.do(init.ObjPos), init.Desc)
+	for {
+		var pkg serial.ReferrersPackage
+		if err := dec.Decode(&pkg); err == io.EOF {
+			break
+		} else if err != nil {
+			log.Fatalf("failed to unmarshal ReferrersPackage: %v\n", err)
+		}
+		for _, r := range pkg.Refs {
+			fmt.Printf("%v: %v\n", ps.do(r.Pos), r.Text)
+		}
+	}
 }
 
 // rename renames the selected identifier
