@@ -3,16 +3,18 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:c1f51755166959b4a49b3ad6101fb809845cf4e7154626acd5fa56c74dd5a21d"
+  digest = "1:895df0b5bb7ad1e98134bd65071fb4bc3d738d0f1a8f3ed4fc9286988e79712d"
   name = "9fans.net/go"
   packages = [
     "acme",
+    "draw",
+    "draw/drawfcall",
     "plan9",
     "plan9/client",
     "plumb",
   ]
   pruneopts = ""
-  revision = "65b8cf069318223b1e722b4b36e729e5e9bb9eab"
+  revision = "5d4fa602e1e8820d8a73a56ced51938563c1cf7e"
 
 [[projects]]
   branch = "master"
