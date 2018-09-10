@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:895df0b5bb7ad1e98134bd65071fb4bc3d738d0f1a8f3ed4fc9286988e79712d"
+  digest = "1:1274113f4dd86160da67ea2d456f953d48761c846fdfb79beba134ecaa021766"
   name = "9fans.net/go"
   packages = [
     "acme",
@@ -13,15 +13,15 @@
     "plan9/client",
     "plumb",
   ]
-  pruneopts = ""
+  pruneopts = "NUT"
   revision = "5d4fa602e1e8820d8a73a56ced51938563c1cf7e"
 
 [[projects]]
   branch = "master"
-  digest = "1:c3d36d981e80e3821512eadbc00ed28869dd17bfd40d21e06d79d56c629735f6"
+  digest = "1:04ab202853eb6e71d727da0f90b00c17bbdfcbd9c4a0fcadb7e625e15f1ae9f4"
   name = "golang.org/x/tools"
   packages = ["cmd/guru/serial"]
-  pruneopts = ""
+  pruneopts = "NUT"
   revision = "18207bb12d3a3338e74403fed8ca1ba866dd3a57"
 
 [solve-meta]

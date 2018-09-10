@@ -1,3 +1,8 @@
+[prune]
+  unused-packages = true
+  non-go = true
+  go-tests = true
+
 [[constraint]]
   branch = "master"
   name = "9fans.net/go"
