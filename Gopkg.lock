@@ -3,13 +3,33 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:c1f51755166959b4a49b3ad6101fb809845cf4e7154626acd5fa56c74dd5a21d"
   name = "9fans.net/go"
-  packages = ["acme","plan9","plan9/client","plumb"]
+  packages = [
+    "acme",
+    "plan9",
+    "plan9/client",
+    "plumb",
+  ]
+  pruneopts = ""
   revision = "65b8cf069318223b1e722b4b36e729e5e9bb9eab"
+
+[[projects]]
+  branch = "master"
+  digest = "1:c3d36d981e80e3821512eadbc00ed28869dd17bfd40d21e06d79d56c629735f6"
+  name = "golang.org/x/tools"
+  packages = ["cmd/guru/serial"]
+  pruneopts = ""
+  revision = "18207bb12d3a3338e74403fed8ca1ba866dd3a57"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "4d80e39149cb2c7c60523c124310a9203e8929d7976e3629bc70c8b4e6a3b1e0"
+  input-imports = [
+    "9fans.net/go/acme",
+    "9fans.net/go/plan9",
+    "9fans.net/go/plumb",
+    "golang.org/x/tools/cmd/guru/serial",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
