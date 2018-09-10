@@ -1,0 +1,4 @@
+9fans.net/go v0.0.0-20180727211846-5d4fa602e1e8 h1:I5as7fR6RT+wVrs+vOeEtOHJ4z2vnUnIR+cqvAiQ80s=
+9fans.net/go v0.0.0-20180727211846-5d4fa602e1e8/go.mod h1:diCsxrliIURU9xsYtjCp5AbpQKqdhKmf0ujWDUSkfoY=
+golang.org/x/tools v0.0.0-20180910180008-18207bb12d3a h1:WXznwrGNXJbNBFNxyOj4S7ODVSD4SBZPRm2A97cySQQ=
+golang.org/x/tools v0.0.0-20180910180008-18207bb12d3a/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
