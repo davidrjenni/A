@@ -16,6 +16,9 @@ os:
     - linux
     - osx
 
+env:
+    - GO111MODULE=on
+
 before_install:
     - GO_FILES=$(go list ./... | grep -v /vendor/ | grep -v /test-fixtures/)
     - go get -v golang.org/x/lint/golint
