@@ -1,0 +1,40 @@
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
+name: CI
+
+jobs:
+  test:
+    name: Lint and test
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        go: [1.13.x, 1.14.x, 1.15.x]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Install Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go }}
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: golint
+      run: |
+        go get golang.org/x/lint/golint
+        golint -set_exit_status ./...
+    - name: unconvert
+      run: |
+        go get github.com/mdempsky/unconvert
+        unconvert -v ./...
+    - name: maligned
+      run: |
+        go get github.com/mdempsky/maligned
+        maligned ./...
+    - name: staticcheck
+      run: |
+        go get honnef.co/go/tools/cmd/staticcheck
+        staticcheck ./...
+    - name: Test
+      run: go test -race ./...
